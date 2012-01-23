@@ -12,5 +12,5 @@ Once implemented just add your class as delegate, using the methods
 addLocationDelegate: and addGeocoderDelegate:. Now your class will be 
 happily working :)
 
-For further information check out 
+For full documentation check out 
 http://vicpenap.github.com/VPPLocation
