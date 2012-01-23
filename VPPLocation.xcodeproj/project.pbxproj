@@ -1,0 +1,305 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5788CF1014CDCE6F00854E50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5788CF0F14CDCE6F00854E50 /* UIKit.framework */; };
+		5788CF1214CDCE6F00854E50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5788CF1114CDCE6F00854E50 /* Foundation.framework */; };
+		5788CF1414CDCE6F00854E50 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5788CF1314CDCE6F00854E50 /* CoreGraphics.framework */; };
+		5788CF1A14CDCE6F00854E50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5788CF1814CDCE6F00854E50 /* InfoPlist.strings */; };
+		5788CF1C14CDCE6F00854E50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5788CF1B14CDCE6F00854E50 /* main.m */; };
+		5788CF2014CDCE6F00854E50 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5788CF1F14CDCE6F00854E50 /* AppDelegate.m */; };
+		5788CF3C14CDCEF200854E50 /* LocationControllerExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 5788CF3B14CDCEF200854E50 /* LocationControllerExample.m */; };
+		5788CF3E14CDCF6600854E50 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5788CF3D14CDCF6600854E50 /* MapKit.framework */; };
+		5788CF4014CDCF6D00854E50 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5788CF3F14CDCF6D00854E50 /* CoreLocation.framework */; };
+		5788CF4814CDD01F00854E50 /* VPPLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5788CF4514CDD01F00854E50 /* VPPLocationController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5788CF0B14CDCE6F00854E50 /* VPPLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPPLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5788CF0F14CDCE6F00854E50 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5788CF1114CDCE6F00854E50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5788CF1314CDCE6F00854E50 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5788CF1714CDCE6F00854E50 /* VPPLocation-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VPPLocation-Info.plist"; sourceTree = "<group>"; };
+		5788CF1914CDCE6F00854E50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5788CF1B14CDCE6F00854E50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5788CF1D14CDCE6F00854E50 /* VPPLocation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VPPLocation-Prefix.pch"; sourceTree = "<group>"; };
+		5788CF1E14CDCE6F00854E50 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5788CF1F14CDCE6F00854E50 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5788CF3A14CDCEF200854E50 /* LocationControllerExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationControllerExample.h; sourceTree = "<group>"; };
+		5788CF3B14CDCEF200854E50 /* LocationControllerExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationControllerExample.m; sourceTree = "<group>"; };
+		5788CF3D14CDCF6600854E50 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5788CF3F14CDCF6D00854E50 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5788CF4214CDD01F00854E50 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
+		5788CF4414CDD01F00854E50 /* VPPLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPPLocationController.h; sourceTree = "<group>"; };
+		5788CF4514CDD01F00854E50 /* VPPLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPPLocationController.m; sourceTree = "<group>"; };
+		5788CF4614CDD01F00854E50 /* VPPLocationControllerGeocoderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPPLocationControllerGeocoderDelegate.h; sourceTree = "<group>"; };
+		5788CF4714CDD01F00854E50 /* VPPLocationControllerLocationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPPLocationControllerLocationDelegate.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5788CF0814CDCE6F00854E50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5788CF4014CDCF6D00854E50 /* CoreLocation.framework in Frameworks */,
+				5788CF3E14CDCF6600854E50 /* MapKit.framework in Frameworks */,
+				5788CF1014CDCE6F00854E50 /* UIKit.framework in Frameworks */,
+				5788CF1214CDCE6F00854E50 /* Foundation.framework in Frameworks */,
+				5788CF1414CDCE6F00854E50 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5788CF0014CDCE6F00854E50 = {
+			isa = PBXGroup;
+			children = (
+				5788CF1514CDCE6F00854E50 /* VPPLocation */,
+				5788CF0E14CDCE6F00854E50 /* Frameworks */,
+				5788CF0C14CDCE6F00854E50 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5788CF0C14CDCE6F00854E50 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5788CF0B14CDCE6F00854E50 /* VPPLocation.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5788CF0E14CDCE6F00854E50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5788CF3F14CDCF6D00854E50 /* CoreLocation.framework */,
+				5788CF3D14CDCF6600854E50 /* MapKit.framework */,
+				5788CF0F14CDCE6F00854E50 /* UIKit.framework */,
+				5788CF1114CDCE6F00854E50 /* Foundation.framework */,
+				5788CF1314CDCE6F00854E50 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5788CF1514CDCE6F00854E50 /* VPPLocation */ = {
+			isa = PBXGroup;
+			children = (
+				5788CF4114CDD01F00854E50 /* Libraries */,
+				5788CF3A14CDCEF200854E50 /* LocationControllerExample.h */,
+				5788CF3B14CDCEF200854E50 /* LocationControllerExample.m */,
+				5788CF1E14CDCE6F00854E50 /* AppDelegate.h */,
+				5788CF1F14CDCE6F00854E50 /* AppDelegate.m */,
+				5788CF1614CDCE6F00854E50 /* Supporting Files */,
+			);
+			path = VPPLocation;
+			sourceTree = "<group>";
+		};
+		5788CF1614CDCE6F00854E50 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5788CF1714CDCE6F00854E50 /* VPPLocation-Info.plist */,
+				5788CF1814CDCE6F00854E50 /* InfoPlist.strings */,
+				5788CF1B14CDCE6F00854E50 /* main.m */,
+				5788CF1D14CDCE6F00854E50 /* VPPLocation-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5788CF4114CDD01F00854E50 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				5788CF4214CDD01F00854E50 /* SynthesizeSingleton.h */,
+				5788CF4314CDD01F00854E50 /* VPPLocation */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		5788CF4314CDD01F00854E50 /* VPPLocation */ = {
+			isa = PBXGroup;
+			children = (
+				5788CF4414CDD01F00854E50 /* VPPLocationController.h */,
+				5788CF4514CDD01F00854E50 /* VPPLocationController.m */,
+				5788CF4614CDD01F00854E50 /* VPPLocationControllerGeocoderDelegate.h */,
+				5788CF4714CDD01F00854E50 /* VPPLocationControllerLocationDelegate.h */,
+			);
+			path = VPPLocation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5788CF0A14CDCE6F00854E50 /* VPPLocation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5788CF2314CDCE6F00854E50 /* Build configuration list for PBXNativeTarget "VPPLocation" */;
+			buildPhases = (
+				5788CF0714CDCE6F00854E50 /* Sources */,
+				5788CF0814CDCE6F00854E50 /* Frameworks */,
+				5788CF0914CDCE6F00854E50 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VPPLocation;
+			productName = VPPLocation;
+			productReference = 5788CF0B14CDCE6F00854E50 /* VPPLocation.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5788CF0214CDCE6F00854E50 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 5788CF0514CDCE6F00854E50 /* Build configuration list for PBXProject "VPPLocation" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5788CF0014CDCE6F00854E50;
+			productRefGroup = 5788CF0C14CDCE6F00854E50 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5788CF0A14CDCE6F00854E50 /* VPPLocation */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5788CF0914CDCE6F00854E50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5788CF1A14CDCE6F00854E50 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5788CF0714CDCE6F00854E50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5788CF1C14CDCE6F00854E50 /* main.m in Sources */,
+				5788CF2014CDCE6F00854E50 /* AppDelegate.m in Sources */,
+				5788CF3C14CDCEF200854E50 /* LocationControllerExample.m in Sources */,
+				5788CF4814CDD01F00854E50 /* VPPLocationController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5788CF1814CDCE6F00854E50 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5788CF1914CDCE6F00854E50 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5788CF2114CDCE6F00854E50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		5788CF2214CDCE6F00854E50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5788CF2414CDCE6F00854E50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VPPLocation/VPPLocation-Prefix.pch";
+				INFOPLIST_FILE = "VPPLocation/VPPLocation-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5788CF2514CDCE6F00854E50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VPPLocation/VPPLocation-Prefix.pch";
+				INFOPLIST_FILE = "VPPLocation/VPPLocation-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5788CF0514CDCE6F00854E50 /* Build configuration list for PBXProject "VPPLocation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5788CF2114CDCE6F00854E50 /* Debug */,
+				5788CF2214CDCE6F00854E50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5788CF2314CDCE6F00854E50 /* Build configuration list for PBXNativeTarget "VPPLocation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5788CF2414CDCE6F00854E50 /* Debug */,
+				5788CF2514CDCE6F00854E50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5788CF0214CDCE6F00854E50 /* Project object */;
+}
