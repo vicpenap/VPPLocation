@@ -138,7 +138,9 @@
 			
 			break;
 		case 0:
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 			cell.textLabel.text = @"Tell me where I am";
+            cell.detailTextLabel.text = nil;
 			break;
 
 		default:

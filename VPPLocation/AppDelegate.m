@@ -13,10 +13,12 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize navigationController;
 
 - (void)dealloc
 {
     [_window release];
+    self.navigationController = nil;
     [super dealloc];
 }
 
@@ -27,11 +29,11 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     LocationControllerExample *l = [[LocationControllerExample alloc] initWithStyle:UITableViewStyleGrouped];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:l];
-    [self.window addSubview:navController.view];
-    [self.window makeKeyAndVisible];
-    [navController release];
+    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:l] autorelease];
     [l release];
+    [self.window addSubview:self.navigationController.view];
+    [self.window makeKeyAndVisible];
+
     return YES;
 }
 
