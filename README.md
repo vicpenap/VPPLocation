@@ -1,7 +1,7 @@
 VPPLocation Library for iOS simplifies the task of retrieving the user 
 location and geocoder info about it. 
 
-Library is in VPPLocation/Libraries/VPPLocation. Also a copy of 
+Library is in [VPPLocation/Libraries/VPPLocation](https://github.com/vicpenap/VPPLocation/tree/master/VPPLocation/Libraries/VPPLocation). Also a copy of 
 SynthesizeSingleton is included.
  
 In order to use it you should implement:
