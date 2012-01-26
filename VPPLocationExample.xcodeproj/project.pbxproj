@@ -20,14 +20,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5788CF0B14CDCE6F00854E50 /* VPPLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPPLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5788CF0B14CDCE6F00854E50 /* VPPLocationExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPPLocationExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5788CF0F14CDCE6F00854E50 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5788CF1114CDCE6F00854E50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5788CF1314CDCE6F00854E50 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		5788CF1714CDCE6F00854E50 /* VPPLocation-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VPPLocation-Info.plist"; sourceTree = "<group>"; };
+		5788CF1714CDCE6F00854E50 /* VPPLocationExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "VPPLocationExample-Info.plist"; sourceTree = "<group>"; };
 		5788CF1914CDCE6F00854E50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5788CF1B14CDCE6F00854E50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5788CF1D14CDCE6F00854E50 /* VPPLocation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VPPLocation-Prefix.pch"; sourceTree = "<group>"; };
+		5788CF1D14CDCE6F00854E50 /* VPPLocationExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VPPLocationExample-Prefix.pch"; sourceTree = "<group>"; };
 		5788CF1E14CDCE6F00854E50 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5788CF1F14CDCE6F00854E50 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5788CF3A14CDCEF200854E50 /* LocationControllerExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationControllerExample.h; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 		5788CF0014CDCE6F00854E50 = {
 			isa = PBXGroup;
 			children = (
-				5788CF1514CDCE6F00854E50 /* VPPLocation */,
+				5788CF1514CDCE6F00854E50 /* VPPLocationExample */,
 				5788CF0E14CDCE6F00854E50 /* Frameworks */,
 				5788CF0C14CDCE6F00854E50 /* Products */,
 			);
@@ -69,7 +69,7 @@
 		5788CF0C14CDCE6F00854E50 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5788CF0B14CDCE6F00854E50 /* VPPLocation.app */,
+				5788CF0B14CDCE6F00854E50 /* VPPLocationExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,7 +86,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5788CF1514CDCE6F00854E50 /* VPPLocation */ = {
+		5788CF1514CDCE6F00854E50 /* VPPLocationExample */ = {
 			isa = PBXGroup;
 			children = (
 				5788CF4114CDD01F00854E50 /* Libraries */,
@@ -96,16 +96,16 @@
 				5788CF1F14CDCE6F00854E50 /* AppDelegate.m */,
 				5788CF1614CDCE6F00854E50 /* Supporting Files */,
 			);
-			path = VPPLocation;
+			path = VPPLocationExample;
 			sourceTree = "<group>";
 		};
 		5788CF1614CDCE6F00854E50 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5788CF1714CDCE6F00854E50 /* VPPLocation-Info.plist */,
+				5788CF1714CDCE6F00854E50 /* VPPLocationExample-Info.plist */,
 				5788CF1814CDCE6F00854E50 /* InfoPlist.strings */,
 				5788CF1B14CDCE6F00854E50 /* main.m */,
-				5788CF1D14CDCE6F00854E50 /* VPPLocation-Prefix.pch */,
+				5788CF1D14CDCE6F00854E50 /* VPPLocationExample-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -133,9 +133,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5788CF0A14CDCE6F00854E50 /* VPPLocation */ = {
+		5788CF0A14CDCE6F00854E50 /* VPPLocationExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5788CF2314CDCE6F00854E50 /* Build configuration list for PBXNativeTarget "VPPLocation" */;
+			buildConfigurationList = 5788CF2314CDCE6F00854E50 /* Build configuration list for PBXNativeTarget "VPPLocationExample" */;
 			buildPhases = (
 				5788CF0714CDCE6F00854E50 /* Sources */,
 				5788CF0814CDCE6F00854E50 /* Frameworks */,
@@ -145,9 +145,9 @@
 			);
 			dependencies = (
 			);
-			name = VPPLocation;
+			name = VPPLocationExample;
 			productName = VPPLocation;
-			productReference = 5788CF0B14CDCE6F00854E50 /* VPPLocation.app */;
+			productReference = 5788CF0B14CDCE6F00854E50 /* VPPLocationExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -158,7 +158,7 @@
 			attributes = {
 				LastUpgradeCheck = 0420;
 			};
-			buildConfigurationList = 5788CF0514CDCE6F00854E50 /* Build configuration list for PBXProject "VPPLocation" */;
+			buildConfigurationList = 5788CF0514CDCE6F00854E50 /* Build configuration list for PBXProject "VPPLocationExample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -170,7 +170,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5788CF0A14CDCE6F00854E50 /* VPPLocation */,
+				5788CF0A14CDCE6F00854E50 /* VPPLocationExample */,
 			);
 		};
 /* End PBXProject section */
@@ -231,6 +231,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "VPPLocationExample/VPPLocationExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
@@ -248,6 +249,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "VPPLocationExample/VPPLocationExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
@@ -259,10 +261,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "VPPLocation/VPPLocation-Prefix.pch";
-				INFOPLIST_FILE = "VPPLocation/VPPLocation-Info.plist";
+				GCC_PREFIX_HEADER = "VPPLocationExample/VPPLocationExample-Prefix.pch";
+				INFOPLIST_FILE = "VPPLocationExample/VPPLocationExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = VPPLocationExample;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -271,10 +273,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "VPPLocation/VPPLocation-Prefix.pch";
-				INFOPLIST_FILE = "VPPLocation/VPPLocation-Info.plist";
+				GCC_PREFIX_HEADER = "VPPLocationExample/VPPLocationExample-Prefix.pch";
+				INFOPLIST_FILE = "VPPLocationExample/VPPLocationExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = VPPLocationExample;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -282,7 +284,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5788CF0514CDCE6F00854E50 /* Build configuration list for PBXProject "VPPLocation" */ = {
+		5788CF0514CDCE6F00854E50 /* Build configuration list for PBXProject "VPPLocationExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5788CF2114CDCE6F00854E50 /* Debug */,
@@ -291,13 +293,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5788CF2314CDCE6F00854E50 /* Build configuration list for PBXNativeTarget "VPPLocation" */ = {
+		5788CF2314CDCE6F00854E50 /* Build configuration list for PBXNativeTarget "VPPLocationExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5788CF2414CDCE6F00854E50 /* Debug */,
 				5788CF2514CDCE6F00854E50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
