@@ -113,7 +113,6 @@
 		5788CF4114CDD01F00854E50 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				5788CF4214CDD01F00854E50 /* SynthesizeSingleton.h */,
 				5788CF4314CDD01F00854E50 /* VPPLocation */,
 			);
 			path = Libraries;
@@ -122,13 +121,14 @@
 		5788CF4314CDD01F00854E50 /* VPPLocation */ = {
 			isa = PBXGroup;
 			children = (
+				5788CF4214CDD01F00854E50 /* SynthesizeSingleton.h */,
 				5788CF4414CDD01F00854E50 /* VPPLocationController.h */,
 				5788CF4514CDD01F00854E50 /* VPPLocationController.m */,
 				5788CF4614CDD01F00854E50 /* VPPLocationControllerGeocoderDelegate.h */,
 				5788CF4714CDD01F00854E50 /* VPPLocationControllerLocationDelegate.h */,
 			);
 			path = VPPLocation;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
