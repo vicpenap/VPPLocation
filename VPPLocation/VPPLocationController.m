@@ -209,16 +209,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
     return YES;
 }
 
-#pragma mark -
-#pragma mark Starting & Stopping
-
-- (void) resumeUpdatingLocation {
-	[manager_ startUpdatingLocation];
-}
-
-- (void) pauseUpdatingLocation {
-	[manager_ stopUpdatingLocation];
-}
 
 #pragma mark -
 #pragma mark Managing Location Controller
@@ -259,6 +249,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
 		startDate_ = nil;
 	}
 	locationDelegatesLocked = NO;		
+}
+
+
+#pragma mark -
+#pragma mark Starting & Stopping
+
+- (void) resumeUpdatingLocation {
+    if (manager_ == nil) {
+        [self startListening];
+    }
+	[manager_ startUpdatingLocation];
+}
+
+- (void) pauseUpdatingLocation {
+	[manager_ stopUpdatingLocation];
 }
 
 #pragma mark -

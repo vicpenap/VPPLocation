@@ -147,7 +147,7 @@ addLocationDelegate: and addGeocoderDelegate:.
 /** Pauses listening to location updates. */
 - (void) pauseUpdatingLocation;
 
-/** Resumes listening to location updates. */
+/** Resumes (or starts) listening to location updates. */
 - (void) resumeUpdatingLocation;
 	
 	
