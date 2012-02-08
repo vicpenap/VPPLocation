@@ -79,9 +79,9 @@
 - (void) notifyLocationListener:(id<VPPLocationControllerLocationDelegate>)listener newLocation:(CLLocation*)location;
 - (void) notifyLocationListener:(id<VPPLocationControllerLocationDelegate>)listener error:(NSError*)error;
 
-- (void) notifyAllGeocoderListenersNewPlacemark:(MKPlacemark*)placemark;
+- (void) notifyAllGeocoderListenersNewPlacemark:(CLPlacemark*)placemark;
 - (void) notifyAllGeocoderListenersError:(NSError*)error;
-- (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener newPlacemark:(MKPlacemark*)placemark;
+- (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener newPlacemark:(CLPlacemark*)placemark;
 - (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener error:(NSError*)error;
 
 @end
@@ -127,7 +127,7 @@
 
 
 
-- (void) notifyAllGeocoderListenersNewPlacemark:(MKPlacemark*)placemark {
+- (void) notifyAllGeocoderListenersNewPlacemark:(CLPlacemark*)placemark {
 	geocoderDelegatesLocked = YES;
 	[geocoderDelegates_ makeObjectsPerformSelector:@selector(geocoderUpdate:) withObject:placemark];
 	geocoderDelegatesLocked = NO;
@@ -139,7 +139,7 @@
 	geocoderDelegatesLocked = NO;	
 }
 
-- (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener newPlacemark:(MKPlacemark*)placemark {
+- (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener newPlacemark:(CLPlacemark*)placemark {
 	[listener geocoderUpdate:placemark];
 }
 - (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener error:(NSError*)error {
@@ -147,6 +147,68 @@
 }
 
 @end
+
+@interface VPPLocationController (Geocoder)
+
+- (void) startSearchingPlacemarkForCoordinate:(CLLocation *)location;
+- (void)reverseGeocoder:(CLGeocoder *)geocoder didFailWithError:(NSError *)error;
+- (void)reverseGeocoder:(CLGeocoder *)geocoder didFindPlacemark:(CLPlacemark *)placemark;
+- (void) startSearchingPlacemarkForCoordinate:(CLLocation *)location;
+- (BOOL) isGeocoderEnabled;
+
+@end
+
+
+
+@implementation VPPLocationController (Geocoder)
+
+
+#pragma mark -
+#pragma mark CLGeocoderDelegate
+
+- (void)reverseGeocoder:(CLGeocoder *)geocoder didFailWithError:(NSError *)error {
+    if (geocoderError_ != nil) {
+        [geocoderError_ release];
+    }
+	geocoderError_ = [error retain];
+	
+	[self notifyAllGeocoderListenersError:geocoderError_];
+	
+    if (error.code != kCLErrorGeocodeFoundNoResult && error.code != kCLErrorGeocodeFoundPartialResult) {
+        [self startSearchingPlacemarkForCoordinate:self.currentLocation];
+    }
+}
+
+
+- (void)reverseGeocoder:(CLGeocoder *)geocoder didFindPlacemark:(CLPlacemark *)placemark {
+	[currentPlacemark_ release];
+	currentPlacemark_ = [placemark retain];
+	
+	[self notifyAllGeocoderListenersNewPlacemark:self.currentPlacemark];
+}
+
+- (void) startSearchingPlacemarkForCoordinate:(CLLocation *)location {
+    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    [geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (placemarks == nil) { // error
+            [self reverseGeocoder:geoCoder didFailWithError:error];
+        }
+        else {
+            [self reverseGeocoder:geoCoder didFindPlacemark:[placemarks objectAtIndex:0]];
+        }
+    }];
+    [geoCoder release];
+}
+
+
+- (BOOL) isGeocoderEnabled {
+    return [geocoderDelegates_ count] != 0;
+}
+
+
+@end
+
+
 
 
 
@@ -174,23 +236,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
     }
     
     return lc;
-}
-
-#pragma mark - Auxiliar geocoder methods
-
-- (void) startSearchingPlacemarkForCoordinate:(CLLocationCoordinate2D)coordinate {
-    if (geoCoder_ != nil) {
-        [geoCoder_ cancel];
-        [geoCoder_ release];
-    }
-    geoCoder_ = [[MKReverseGeocoder alloc] initWithCoordinate:coordinate];
-    geoCoder_.delegate = self;
-    [geoCoder_ start];
-}
-
-
-- (BOOL) isGeocoderEnabled {
-    return [geocoderDelegates_ count] != 0;
 }
 
 #pragma mark - Auxiliar location methods
@@ -324,14 +369,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
 
 
 - (void) addGeocoderDelegate:(id<VPPLocationControllerGeocoderDelegate>)delegate {
-	if (geocoderDelegates_ == nil) {
+    BOOL mustStart = geocoderDelegates_ == nil;
+    
+	if (mustStart) {
 		geocoderDelegates_ = [[NSMutableArray alloc] init];
 	}
 	
 	if (![geocoderDelegates_ containsObject:delegate]) {
 		[geocoderDelegates_ addObject:delegate];
 	}
-	
 	
 	if (self.currentPlacemark) {
 		[self notifyGeocoderListener:delegate newPlacemark:self.currentPlacemark];
@@ -341,8 +387,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
 	}
     
 	
-	if (geoCoder_ == nil && self.currentLocation != nil) {
-        [self startSearchingPlacemarkForCoordinate:self.currentLocation.coordinate];
+	if (mustStart && self.currentLocation != nil) {
+        [self startSearchingPlacemarkForCoordinate:self.currentLocation];
 	}
 }
 
@@ -357,11 +403,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
 		return;
 	}
 	[geocoderDelegates_ removeObject:delegate];
-	if ([geocoderDelegates_ count] == 0) {
-        [geoCoder_ cancel];
-		[geoCoder_ release];
-		geoCoder_ = nil;
-	}	
 }
 
 
@@ -392,7 +433,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
         
         
         if ([self isGeocoderEnabled]) {
-            [self startSearchingPlacemarkForCoordinate:self.currentLocation.coordinate];
+            [self startSearchingPlacemarkForCoordinate:self.currentLocation];
         }
     }
     
@@ -409,34 +450,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
 }
 
 
-#pragma mark -
-#pragma mark MKReverseGeocoderDelegate
 
-- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error {
-	if (geoCoder_ != nil) {
-		[geoCoder_ release];
-		geoCoder_ = nil;
-	}
-	[geocoderError_ release];
-	geocoderError_ = [error retain];
-	
-	[self notifyAllGeocoderListenersError:geocoderError_];
-	
-    if (![error.domain isEqualToString:MKErrorDomain] || error.code != MKErrorPlacemarkNotFound) {
-        [self startSearchingPlacemarkForCoordinate:self.currentLocation.coordinate];
+
+@end
+
+
+
+
+@implementation CLPlacemark (VPPLocation)
+
+- (NSString *) address {
+    NSString *adr = self.thoroughfare;
+    if (self.subThoroughfare) {
+        adr = [adr stringByAppendingFormat:@", %@",self.subThoroughfare];
     }
+
+    return adr;
 }
-
-
-- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark {
-	[currentPlacemark_ release];
-	currentPlacemark_ = [placemark retain];
-	
-	[self notifyAllGeocoderListenersNewPlacemark:self.currentPlacemark];
-	
-	[geoCoder_ release];
-	geoCoder_ = nil;
-}
-
 
 @end

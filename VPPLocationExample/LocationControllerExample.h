@@ -15,6 +15,8 @@ VPPLocationControllerGeocoderDelegate> {
 	
 @private
 	BOOL errorGPS;
+    BOOL loadingGeocoder;
+    BOOL errorGeocoder;
 }
 
 @property (nonatomic, retain) NSMutableArray *locations;

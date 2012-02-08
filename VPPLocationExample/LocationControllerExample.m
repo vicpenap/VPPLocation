@@ -101,6 +101,12 @@
 - (NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	switch (section) {
 		case 0:
+            if (loadingGeocoder) {
+                return @"Loading...";
+            }
+            if (errorGeocoder) {
+                return @"Error with geocoder";
+            }
 			return address;
 		
 		case 1:
@@ -205,6 +211,8 @@
 	switch (indexPath.section) {
 		case 0:
 			[[VPPLocationController sharedInstance] addGeocoderDelegate:self];
+            loadingGeocoder = YES;
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
 			
 			[tableView deselectRowAtIndexPath:indexPath animated:YES];
 			break;
@@ -258,12 +266,16 @@
 
 #pragma mark -
 #pragma mark VPPLocationControllerGeocoderDelegate implementation
-- (void)geocoderUpdate:(MKPlacemark *)placemark {
-	self.address = [NSString stringWithFormat:@"%@, %@",placemark.thoroughfare,placemark.subThoroughfare];
+- (void)geocoderUpdate:(CLPlacemark *)placemark {
+    loadingGeocoder = NO;
+    errorGeocoder = NO;    
+	self.address = placemark.address;
 	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)geocoderError:(NSError *)error {
+    loadingGeocoder = NO;
+    errorGeocoder = YES;
 }
 
 @end
