@@ -49,6 +49,12 @@ addLocationDelegate: and addGeocoderDelegate:.
  @warning **Important** This library depends on CoreLocation framework, 
  MapKit framework and SynthesizeSingleton library (by Matt Gallagher).
  
+ **Important**: If you were using the previous version v1.0.0, you will have to
+ change all references to `MKPlacemark` objects with references to new 
+ `CLPlacemark` object. Anyway, they both share the same interface, so you just
+ have to change their class names.
+
+ 
  */ 
  
 
