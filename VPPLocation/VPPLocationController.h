@@ -46,8 +46,8 @@
 Once implemented just add your class as delegate, using the methods 
 addLocationDelegate: and addGeocoderDelegate:.
  
- @warning **Important** This library depends on CoreLocation framework, 
- MapKit framework and SynthesizeSingleton library (by Matt Gallagher).
+ @warning **Important** This library depends on `CoreLocation` framework and
+ `SynthesizeSingleton` library (by Matt Gallagher).
  
  **Important**: If you were using the previous version v1.0.0, you will have to
  change all references to `MKPlacemark` objects with references to new 
