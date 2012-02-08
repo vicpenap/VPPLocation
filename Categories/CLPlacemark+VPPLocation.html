@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>VPPLocationControllerLocationDelegate Protocol Reference</title>
+		<title>CLPlacemark(VPPLocation) Category Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">VPPLocationControllerLocationDelegate Protocol Reference</h1>
+				<h1 class="hideInXcode">CLPlacemark(VPPLocation) Category Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -38,17 +38,13 @@
 	
 	
 	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/address">&nbsp;&nbsp;&nbsp;&nbsp;address</option>
 	
 	
 	
 	
-	<option value="instance_methods">Instance Methods</option>
-	
-	<option value="//api/name/locationDenied">&nbsp;&nbsp;&nbsp;&nbsp;- locationDenied</option>
-	
-	<option value="//api/name/locationError:">&nbsp;&nbsp;&nbsp;&nbsp;- locationError:</option>
-	
-	<option value="//api/name/locationUpdate:">&nbsp;&nbsp;&nbsp;&nbsp;- locationUpdate:</option>
 	
 	
 	
@@ -72,26 +68,22 @@
 
 
 
-
-
-
-
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/locationDenied">locationDenied</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/locationError:">locationError:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/locationUpdate:">locationUpdate:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/address">address</a></span></li>
 	
 </ul></li>
+
+
+
+
 
 
 			</ul>
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="VPPLocationControllerLocationDelegate Protocol Reference" name="top"></a>
+				<a title="CLPlacemark(VPPLocation) Category Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -100,7 +92,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">VPPLocationControllerLocationDelegate Protocol Reference</h1>
+						<h1 class="title title-header">CLPlacemark(VPPLocation) Category Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -108,7 +100,7 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">VPPLocationControllerLocationDelegate.h</td>
+	<td class="specification-value">VPPLocationController.h<br />VPPLocationController.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -118,8 +110,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>This protocol defines a set of required methods that you must use to receive
-location update messages.</p>
+						<p>This CLPlacemark category adds some useful accesory methods.</p>
 					</div>
 					
 					
@@ -137,25 +128,12 @@ location update messages.</p>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/locationUpdate:">&ndash;&nbsp;locationUpdate:</a></code>
-		<span class="tooltip"><p>Tells the delegate that new location information has been received.</p></span>
+		<code><a href="#//api/name/address">&nbsp;&nbsp;address</a></code>
+		<span class="tooltip"><p>Returns a smart <a href="#//api/name/address">address</a> formatted string, based on <code>thoroughfare</code> and
+<code>subThoroughfare</code> properties.</p></span>
 	</span>
+	<span class="task-item-suffix">property</span>
 	
-	<span class="task-item-suffix">required method</span>
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/locationError:">&ndash;&nbsp;locationError:</a></code>
-		<span class="tooltip"><p>Tells the delegate that there has been an error with the location.</p></span>
-	</span>
-	
-	<span class="task-item-suffix">required method</span>
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/locationDenied">&ndash;&nbsp;locationDenied</a></code>
-		<span class="tooltip"><p>Notifies the delegate that access to location information is denied.</p></span>
-	</span>
-	
-	<span class="task-item-suffix">required method</span>
 </li>
 						</ul>
 						
@@ -165,26 +143,23 @@ location update messages.</p>
 					
 					
 					
-					
-					
-					
-					
 					<div class="section section-methods">
-						<a title="Instance Methods" name="instance_methods"></a>
-						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/locationDenied" title="locationDenied"></a>
-	<h3 class="subsubtitle method-title">locationDenied</h3>
+	<a name="//api/name/address" title="address"></a>
+	<h3 class="subsubtitle method-title">address</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Notifies the delegate that access to location information is denied.</p>
+		<p>Returns a smart <a href="#//api/name/address">address</a> formatted string, based on <code>thoroughfare</code> and
+<code>subThoroughfare</code> properties.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)locationDenied</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSString *address</code></div>
 	
 	
 	
@@ -192,6 +167,13 @@ location update messages.</p>
 	
 	
 	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>If both are different than <code>nil</code>, the returned string will be
+<code>thoroughfare, subThoroughfare</code>. In case <code>subThoroughfare</code> is <code>nil</code>, the
+returned string will be <code>thoroughfare</code>.</p>
+	</div>
 	
 	
 	
@@ -201,81 +183,17 @@ location update messages.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">VPPLocationControllerLocationDelegate.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/locationError:" title="locationError:"></a>
-	<h3 class="subsubtitle method-title">locationError:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Tells the delegate that there has been an error with the location.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (void)locationError:(NSError *)<em>error</em></code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">VPPLocationControllerLocationDelegate.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/locationUpdate:" title="locationUpdate:"></a>
-	<h3 class="subsubtitle method-title">locationUpdate:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Tells the delegate that new location information has been received.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>- (void)locationUpdate:(CLLocation *)<em>location</em></code></div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">VPPLocationControllerLocationDelegate.h</code><br />
+		<code class="declared-in-ref">VPPLocationController.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 					</div>
+					
+					
+					
+					
 					
 					
 				</div>
