@@ -266,7 +266,7 @@
 
 #pragma mark -
 #pragma mark VPPLocationControllerGeocoderDelegate implementation
-- (void)geocoderUpdate:(CLPlacemark *)placemark {
+- (void)geocoderUpdate:(MKPlacemark *)placemark {
     loadingGeocoder = NO;
     errorGeocoder = NO;    
 	self.address = placemark.address;

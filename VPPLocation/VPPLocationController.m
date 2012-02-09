@@ -30,6 +30,13 @@
 #import "SynthesizeSingleton.h"
 
 
+#ifndef MKErrorDomain
+    #define MKErrorDomain @"MKErrorDomain"
+#endif
+
+
+// http://stackoverflow.com/a/5337804/1069001
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 
 /*
@@ -79,9 +86,9 @@
 - (void) notifyLocationListener:(id<VPPLocationControllerLocationDelegate>)listener newLocation:(CLLocation*)location;
 - (void) notifyLocationListener:(id<VPPLocationControllerLocationDelegate>)listener error:(NSError*)error;
 
-- (void) notifyAllGeocoderListenersNewPlacemark:(CLPlacemark*)placemark;
+- (void) notifyAllGeocoderListenersNewPlacemark:(MKPlacemark*)placemark;
 - (void) notifyAllGeocoderListenersError:(NSError*)error;
-- (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener newPlacemark:(CLPlacemark*)placemark;
+- (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener newPlacemark:(MKPlacemark*)placemark;
 - (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener error:(NSError*)error;
 
 @end
@@ -127,7 +134,7 @@
 
 
 
-- (void) notifyAllGeocoderListenersNewPlacemark:(CLPlacemark*)placemark {
+- (void) notifyAllGeocoderListenersNewPlacemark:(MKPlacemark*)placemark {
 	geocoderDelegatesLocked = YES;
 	[geocoderDelegates_ makeObjectsPerformSelector:@selector(geocoderUpdate:) withObject:placemark];
 	geocoderDelegatesLocked = NO;
@@ -139,7 +146,7 @@
 	geocoderDelegatesLocked = NO;	
 }
 
-- (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener newPlacemark:(CLPlacemark*)placemark {
+- (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener newPlacemark:(MKPlacemark*)placemark {
 	[listener geocoderUpdate:placemark];
 }
 - (void) notifyGeocoderListener:(id<VPPLocationControllerGeocoderDelegate>)listener error:(NSError*)error {
@@ -151,10 +158,11 @@
 @interface VPPLocationController (Geocoder)
 
 - (void) startSearchingPlacemarkForCoordinate:(CLLocation *)location;
-- (void)reverseGeocoder:(CLGeocoder *)geocoder didFailWithError:(NSError *)error;
-- (void)reverseGeocoder:(CLGeocoder *)geocoder didFindPlacemark:(CLPlacemark *)placemark;
-- (void) startSearchingPlacemarkForCoordinate:(CLLocation *)location;
 - (BOOL) isGeocoderEnabled;
+#ifdef __IPHONE_5_0
+- (void)CLGeocoder:(CLGeocoder *)geocoder didFailWithError:(NSError *)error;
+- (void)CLGeocoder:(CLGeocoder *)geocoder didFindPlacemark:(CLPlacemark *)placemark;
+#endif
 
 @end
 
@@ -166,7 +174,8 @@
 #pragma mark -
 #pragma mark CLGeocoderDelegate
 
-- (void)reverseGeocoder:(CLGeocoder *)geocoder didFailWithError:(NSError *)error {
+#ifdef __IPHONE_5_0
+- (void)CLGeocoder:(CLGeocoder *)geocoder didFailWithError:(NSError *)error {
     if (geocoderError_ != nil) {
         [geocoderError_ release];
     }
@@ -180,26 +189,43 @@
 }
 
 
-- (void)reverseGeocoder:(CLGeocoder *)geocoder didFindPlacemark:(CLPlacemark *)placemark {
-	[currentPlacemark_ release];
-	currentPlacemark_ = [placemark retain];
+- (void)CLGeocoder:(CLGeocoder *)geocoder didFindPlacemark:(CLPlacemark *)placemark {
+    if (currentPlacemark_ != nil) {
+        [currentPlacemark_ release];
+    }
+	currentPlacemark_ = [[MKPlacemark alloc] initWithPlacemark:placemark];
 	
 	[self notifyAllGeocoderListenersNewPlacemark:self.currentPlacemark];
 }
-
+#endif
 - (void) startSearchingPlacemarkForCoordinate:(CLLocation *)location {
-    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
-    [geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-        if (placemarks == nil) { // error
-            [self reverseGeocoder:geoCoder didFailWithError:error];
-        }
-        else {
-            [self reverseGeocoder:geoCoder didFindPlacemark:[placemarks objectAtIndex:0]];
-        }
-    }];
-    [geoCoder release];
+    
+#ifdef __IPHONE_5_0
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"5.0")) {
+        CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+        [geoCoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+            if (placemarks == nil) { // error
+                [self CLGeocoder:geoCoder didFailWithError:error];
+            }
+            else {
+                [self CLGeocoder:geoCoder didFindPlacemark:[placemarks objectAtIndex:0]];
+            }
+        }];
+        [geoCoder release];
+        
+        return;
+    }
+#endif
+    
+#if VPPINCLUDEMK
+    // there's no memory leak here. When the geoCoder finishes it calls either
+    // didFailWithError or didFindPlacemark, and it is released (or that's what I believe)
+    [geoCoder_ cancel];
+    geoCoder_ = [[MKReverseGeocoder alloc] initWithCoordinate:location.coordinate];
+    geoCoder_.delegate = self;
+    [geoCoder_ start];
+#endif
 }
-
 
 - (BOOL) isGeocoderEnabled {
     return [geocoderDelegates_ count] != 0;
@@ -236,6 +262,49 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
     }
     
     return lc;
+}
+
+- (void) dealloc {
+#if VPPINCLUDEMK
+    if (geoCoder_ != nil) {
+        [geoCoder_ release];
+        geoCoder_ = nil;
+    }
+#endif
+    if (manager_ != nil) {
+        [manager_ release];
+        manager_ = nil;
+    }
+    if (currentLocation_ != nil) {
+        [currentLocation_ release];
+        currentLocation_ = nil;
+    }
+    if (locationDelegates_ != nil) {
+        [locationDelegates_ release];
+        locationDelegates_ = nil;
+    }
+    if (startDate_ != nil) {
+        [startDate_ release];
+        startDate_ = nil;
+    }
+    if (gpsError_ != nil) {
+        [gpsError_ release];
+        gpsError_ = nil;
+    }
+    if (geocoderDelegates_ != nil) {
+        [geocoderDelegates_ release];
+        geocoderDelegates_ = nil;
+    }
+    if (geocoderError_ != nil) {
+        [geocoderError_ release];
+        geocoderError_ = nil;
+    }
+    if (currentPlacemark_ != nil) {
+        [currentPlacemark_ release];
+        currentPlacemark_ = nil;
+    }
+    
+    [super dealloc];
 }
 
 #pragma mark - Auxiliar location methods
@@ -432,7 +501,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
         [self notifyAllLocationListenersNewLocation:newLocation];
         
         
-        if ([self isGeocoderEnabled]) {
+        if ([self isGeocoderEnabled] && self.currentLocation != nil
+            && [self.currentLocation distanceFromLocation:newLocation] != 0) {
             [self startSearchingPlacemarkForCoordinate:self.currentLocation];
         }
     }
@@ -450,6 +520,40 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
 }
 
 
+#pragma mark -
+#pragma mark MKReverseGeocoderDelegate
+
+#if VPPINCLUDEMK
+- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error {
+    NSLog(@"bye");
+    if (geocoderError_ != nil) {
+        [geocoderError_ release];
+    }
+	geocoderError_ = [error retain];
+	
+	[self notifyAllGeocoderListenersError:geocoderError_];
+	
+    if (![error.domain isEqualToString:MKErrorDomain] 
+        || ([error.domain isEqualToString:MKErrorDomain] && error.code != MKErrorPlacemarkNotFound)) {
+        [self startSearchingPlacemarkForCoordinate:self.currentLocation];
+    }
+}
+
+
+- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark {
+    NSLog(@"hi there");
+    
+    if (currentPlacemark_ != nil) {
+        [currentPlacemark_ release];
+    }
+	currentPlacemark_ = [placemark retain];
+	
+	[self notifyAllGeocoderListenersNewPlacemark:self.currentPlacemark];
+    
+    [geocoder release];
+}
+#endif
+
 
 
 @end
@@ -457,12 +561,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
 
 
 
-@implementation CLPlacemark (VPPLocation)
+@implementation MKPlacemark (VPPLocation)
 
 - (NSString *) address {
-    NSString *adr = self.thoroughfare;
+    NSString *adr;
     if (self.subThoroughfare) {
-        adr = [adr stringByAppendingFormat:@", %@",self.subThoroughfare];
+        adr = [self.thoroughfare stringByAppendingFormat:@", %@",self.subThoroughfare];
+    }
+    else {
+        adr = self.thoroughfare;
     }
 
     return adr;

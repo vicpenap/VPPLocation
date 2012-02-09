@@ -29,7 +29,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import "VPPLocationControllerLocationDelegate.h"
-#import "VPPLocationControllerGeocoderDelegate.h"
+#import "VPPLocationControllerGeocoderDelegate.h" 
+#import <MapKit/MapKit.h>
+
 
 
 /**
@@ -46,20 +48,28 @@
 Once implemented just add your class as delegate, using the methods 
 addLocationDelegate: and addGeocoderDelegate:.
  
+ Geocoding feature is adapted to both iOS 4 and 5. If device is running iOS
+ 4, MKReverseGeocoder class will be used. If device is running iOS 5, CLGeocoder
+ new class will be used. In any case the placemark object will be instance of 
+ MKPlacemark.
+ 
  @warning **Important** This library depends on `CoreLocation` framework and
  `SynthesizeSingleton` library (by Matt Gallagher).
- 
- **Important**: If you were using the previous version v1.0.0, you will have to
- change all references to `MKPlacemark` objects with references to new 
- `CLPlacemark` object. Anyway, they both share the same interface, so you just
- have to change their class names.
-
- 
+  
  */ 
- 
 
 
-@interface VPPLocationController : NSObject <CLLocationManagerDelegate> {
+#define VPPINCLUDEMK !defined(__IPHONE_5_0) || __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
+
+#if VPPINCLUDEMK
+#define VPPLocationControllerDelegates CLLocationManagerDelegate, MKReverseGeocoderDelegate
+#else
+#define VPPLocationControllerDelegates CLLocationManagerDelegate
+#endif
+
+
+
+@interface VPPLocationController : NSObject <VPPLocationControllerDelegates> {        
 @private
 	CLLocationManager *manager_;
 	CLLocation* currentLocation_;
@@ -71,7 +81,10 @@ addLocationDelegate: and addGeocoderDelegate:.
 	NSMutableArray *geocoderDelegates_;	
 	BOOL geocoderDelegatesLocked;
 	NSError *geocoderError_;
-	CLPlacemark *currentPlacemark_;
+	MKPlacemark *currentPlacemark_;
+#if VPPINCLUDEMK    
+    MKReverseGeocoder *geoCoder_;
+#endif
 }
 
 
@@ -127,7 +140,7 @@ addLocationDelegate: and addGeocoderDelegate:.
 /** Holds current location. `nil` if no valid location has been received yet. */
 @property (nonatomic, readonly) CLLocation *currentLocation;
 /** Holds current placemark. `nil` if no valid placemark has been received yet. */
-@property (nonatomic, readonly) CLPlacemark *currentPlacemark;
+@property (nonatomic, readonly) MKPlacemark *currentPlacemark;
 
 
 
@@ -174,9 +187,9 @@ addLocationDelegate: and addGeocoderDelegate:.
 
 
 
-/** This CLPlacemark category adds some useful accesory methods. */
+/** This MKPlacemark category adds some useful accesory methods. */
 
-@interface CLPlacemark (VPPLocation)
+@interface MKPlacemark (VPPLocation)
 
 /** Returns a smart address formatted string, based on `thoroughfare` and 
  `subThoroughfare` properties.

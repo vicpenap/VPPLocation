@@ -1,4 +1,4 @@
-# VPPLocation v2.0.0
+# VPPLocation v3.0.0b
 
 VPPLocation Library for iOS simplifies the task of retrieving the user 
 location and reverse geocoder info about it. 
@@ -8,11 +8,16 @@ In order to use it you should implement:
 - VPPLocationControllerLocationDelegate to receive updates of the user
 location.
 - VPPLocationControllerGeocoderDelegate to receive updates of information
-about user location, such as city name or address (`CLPlacemark` object).
+about user location, such as city name or address (`MKPlacemark` object).
 
 Once implemented just add your class as delegate, using the methods 
 addLocationDelegate: and addGeocoderDelegate:. Now your class will be 
 happily working :)
+
+Geocoding feature is adapted to both iOS 4 and 5. If device is running iOS 
+4, MKReverseGeocoder class will be used. If device is running iOS 5, CLGeocoder
+new class will be used. In any case the placemark object will be instance of
+MKPlacemark.
 
 This project contains a sample application using it. Just open the project in 
 XCode, build it and run it. 
@@ -20,12 +25,11 @@ XCode, build it and run it.
 For full documentation check out 
 http://vicpenap.github.com/VPPLocation
 
-**Important**: If you were using the previous version v1.0.0, you will have to
-change all references to `MKPlacemark` objects with references to new 
-`CLPlacemark` object. Anyway, they both share the same interface, so you just
-have to change their class names.
-
 ## Changelog 
+- 2012/02/09 (v3.0.0)
+    - Library geocoding adapted to both iOS 4 and 5. If device is running iOS 
+4, MKReverseGeocoder class will be used. If device is running iOS 5, CLGeocoder
+new class will be used. In any case the placemark will be a MKPlacemark.
 - 2012/02/08 (v2.0.0)
     - Removed all references to MKReverseGeocoder and MKPlacemark
 and updated all code to use new CLGeocoder instead. This class 

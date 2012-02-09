@@ -28,6 +28,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 /** This protocol defines a set of required methods that you must use to receive
  geocoder update messages. */
@@ -36,7 +37,7 @@
 
 @required
 /** Tells the delegate that new geocoder information has been received. */
-- (void)geocoderUpdate:(CLPlacemark *)placemark;
+- (void)geocoderUpdate:(MKPlacemark *)placemark;
 /** Tells the delegate that there has been an error with geocoder. */
 - (void)geocoderError:(NSError *)error;
 
