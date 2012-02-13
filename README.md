@@ -5,9 +5,9 @@ location and reverse geocoder info about it.
 
 In order to use it you should implement:
  
-- VPPLocationControllerLocationDelegate to receive updates of the user
+- `VPPLocationControllerLocationDelegate` to receive updates of the user
 location.
-- VPPLocationControllerGeocoderDelegate to receive updates of information
+- `VPPLocationControllerGeocoderDelegate` to receive updates of information
 about user location, such as city name or address (`MKPlacemark` object).
 
 Once implemented just add your class as delegate, using the methods 
