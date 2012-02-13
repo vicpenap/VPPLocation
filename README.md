@@ -1,4 +1,4 @@
-# VPPLocation v3.0.0b
+# VPPLocation v3.0.0
 
 VPPLocation Library for iOS simplifies the task of retrieving the user 
 location and reverse geocoder info about it. 
@@ -14,10 +14,10 @@ Once implemented just add your class as delegate, using the methods
 addLocationDelegate: and addGeocoderDelegate:. Now your class will be 
 happily working :)
 
-Geocoding feature is adapted to both iOS 4 and 5. If device is running iOS 
-4, MKReverseGeocoder class will be used. If device is running iOS 5, CLGeocoder
-new class will be used. In any case the placemark object will be instance of
-MKPlacemark.
+Geocoding feature is adapted to both iOS 4 and 5. If the device is running iOS 
+4, MKReverseGeocoder class will be used. If the device is running iOS 5, 
+CLGeocoder new class will be used. In any case the placemark object will be 
+instance of MKPlacemark.
 
 This project contains a sample application using it. Just open the project in 
 XCode, build it and run it. 
@@ -26,7 +26,7 @@ For full documentation check out
 http://vicpenap.github.com/VPPLocation
 
 ## Changelog 
-- 2012/02/09 (v3.0.0)
+- 2012/02/13 (v3.0.0)
     - Library geocoding adapted to both iOS 4 and 5. If device is running iOS 
 4, MKReverseGeocoder class will be used. If device is running iOS 5, CLGeocoder
 new class will be used. In any case the placemark will be a MKPlacemark.

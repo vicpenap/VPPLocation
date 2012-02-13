@@ -48,13 +48,13 @@
 Once implemented just add your class as delegate, using the methods 
 addLocationDelegate: and addGeocoderDelegate:.
  
- Geocoding feature is adapted to both iOS 4 and 5. If device is running iOS
- 4, MKReverseGeocoder class will be used. If device is running iOS 5, CLGeocoder
- new class will be used. In any case the placemark object will be instance of 
- MKPlacemark.
+ Geocoding feature is adapted to both iOS 4 and 5. If the device is running iOS
+ 4, MKReverseGeocoder class will be used. If the device is running iOS 5, 
+ CLGeocoder new class will be used. In any case the placemark object will be 
+ instance of MKPlacemark.
  
- @warning **Important** This library depends on `CoreLocation` framework and
- `SynthesizeSingleton` library (by Matt Gallagher).
+ @warning **Important** This library depends on `CoreLocation` framework, 
+ `MapKit` framework and `SynthesizeSingleton` library (by Matt Gallagher).
   
  */ 
 
