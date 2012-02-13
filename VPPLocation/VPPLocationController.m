@@ -483,6 +483,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
            fromLocation:(CLLocation *)oldLocation {
 	// discards possible bad positions
 	if ([self isValidLocation:newLocation]) {
+       
+        if ([self isGeocoderEnabled] 
+            && (!oldLocation || [newLocation distanceFromLocation:oldLocation] != 0)) {
+            [self startSearchingPlacemarkForCoordinate:newLocation];
+        }
+        
         
         /* if location hasn't change, lets omit it */
         if (self.shouldRejectRepeatedLocations && self.currentLocation != nil
@@ -494,6 +500,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
             [gpsError_ release];
             gpsError_ = nil;
         }
+        
         if (currentLocation_ != nil) {
             [currentLocation_ release];
         }
@@ -501,10 +508,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
         [self notifyAllLocationListenersNewLocation:newLocation];
         
         
-        if ([self isGeocoderEnabled] && self.currentLocation != nil
-            && [oldLocation distanceFromLocation:newLocation] != 0) {
-            [self startSearchingPlacemarkForCoordinate:self.currentLocation];
-        }
     }
     
 }
