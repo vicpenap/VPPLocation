@@ -219,7 +219,7 @@
     
 #if VPPINCLUDEMK
     // there's no memory leak here. When the geoCoder finishes it calls either
-    // didFailWithError or didFindPlacemark, and it is released (or that's what I believe)
+    // didFailWithError or didFindPlacemark, where it is released.
     [geoCoder_ cancel];
     geoCoder_ = [[MKReverseGeocoder alloc] initWithCoordinate:location.coordinate];
     geoCoder_.delegate = self;
@@ -258,7 +258,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
     if (mustInitialize) {
         lc.desiredLocationAccuracy = kVPPLocationControllerDesiredAccuracy;
         lc.shouldRejectRepeatedLocations = kVPPLocationShouldRejectRepeatedLocations;
-        lc.strictMode = kVPPLocationControllerStrictMode==1 ? YES : NO;
+        lc.strictMode = kVPPLocationControllerStrictMode;
     }
     
     return lc;
@@ -502,7 +502,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
         
         
         if ([self isGeocoderEnabled] && self.currentLocation != nil
-            && [self.currentLocation distanceFromLocation:newLocation] != 0) {
+            && [oldLocation distanceFromLocation:newLocation] != 0) {
             [self startSearchingPlacemarkForCoordinate:self.currentLocation];
         }
     }
@@ -525,14 +525,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
 
 #if VPPINCLUDEMK
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error {
-    NSLog(@"bye");
     if (geocoderError_ != nil) {
         [geocoderError_ release];
     }
 	geocoderError_ = [error retain];
 	
 	[self notifyAllGeocoderListenersError:geocoderError_];
-	
+    
+    /* weird iOS 4.3 behavior that releases the geocoder when it fails with
+     an error. Previous iOS versions don't release it. */
+    if (!SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"4.3")) {
+        [geoCoder_ release];
+        geoCoder_ = nil;
+    }	
     if (![error.domain isEqualToString:MKErrorDomain] 
         || ([error.domain isEqualToString:MKErrorDomain] && error.code != MKErrorPlacemarkNotFound)) {
         [self startSearchingPlacemarkForCoordinate:self.currentLocation];
@@ -541,8 +546,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
 
 
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark {
-    NSLog(@"hi there");
-    
     if (currentPlacemark_ != nil) {
         [currentPlacemark_ release];
     }
@@ -550,7 +553,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
 	
 	[self notifyAllGeocoderListenersNewPlacemark:self.currentPlacemark];
     
-    [geocoder release];
+    [geoCoder_ release];
+    geoCoder_ = nil;
 }
 #endif
 

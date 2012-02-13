@@ -248,6 +248,8 @@
 - (void) locationUpdate:(CLLocation *)location {
 	// resets error information
 	errorGPS = NO;
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+
 	[self.locations addObject:location];
 	NSIndexPath *iP = [NSIndexPath indexPathForRow:[self.locations count]-1 inSection:1];
 	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:iP] withRowAnimation:UITableViewRowAnimationFade];

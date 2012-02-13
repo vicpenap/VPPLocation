@@ -187,7 +187,7 @@ addLocationDelegate: and addGeocoderDelegate:.
 
 
 
-/** This MKPlacemark category adds some useful accesory methods. */
+/** This MKPlacemark category adds some useful utilities. */
 
 @interface MKPlacemark (VPPLocation)
 
