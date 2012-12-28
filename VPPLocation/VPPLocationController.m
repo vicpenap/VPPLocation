@@ -244,7 +244,7 @@
 @implementation VPPLocationController
 @synthesize currentLocation=currentLocation_;
 @synthesize currentPlacemark=currentPlacemark_;
-@synthesize desiredLocationAccuracy, strictMode, shouldRejectRepeatedLocations;
+@synthesize desiredLocationAccuracy, strictMode, shouldRejectRepeatedLocations, distanceFilter, headingFilter;
 
 
 #pragma mark - Accesing to the singleton instance
@@ -259,6 +259,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
         lc.desiredLocationAccuracy = kVPPLocationControllerDesiredAccuracy;
         lc.shouldRejectRepeatedLocations = kVPPLocationShouldRejectRepeatedLocations;
         lc.strictMode = kVPPLocationControllerStrictMode;
+        lc.distanceFilter = kCLDistanceFilterNone;
+        lc.headingFilter = 1.0;
     }
     
     return lc;
@@ -358,6 +360,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(VPPLocationController);
 		manager_ = [[CLLocationManager alloc] init];
 		manager_.delegate = [self retain]; // send loc updates to myself
 		manager_.desiredAccuracy = self.desiredLocationAccuracy;
+        manager_.distanceFilter = self.distanceFilter;
+        manager_.headingFilter = self.headingFilter;
 		[manager_ startUpdatingLocation];
 	}
 }
