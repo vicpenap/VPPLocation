@@ -37,6 +37,8 @@
 	
 	self.locations = [NSMutableArray array];
 	errorGPS = NO;
+    [VPPLocationController sharedInstance].distanceFilter = 5.0;
+    [VPPLocationController sharedInstance].headingFilter = 5.0;
 	[[VPPLocationController sharedInstance] addLocationDelegate:self];
 }
 

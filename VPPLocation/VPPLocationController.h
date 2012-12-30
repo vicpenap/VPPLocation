@@ -111,12 +111,27 @@ addLocationDelegate: and addGeocoderDelegate:.
  - kCLLocationAccuracyKilometer
  - kCLLocationAccuracyThreeKilometers 
  
- @warning **Important** Note that this accuracy is not guaranteed, and that the better the accurary, 
+ @warning **Important** Note that this accuracy is not guaranteed, and that the better the accuracy,
  the faster the battery gets drained. */
 @property (nonatomic, assign) CLLocationAccuracy desiredLocationAccuracy;
 
 /** Indicates if repeated location updates should be ignored. */
 @property (nonatomic, assign) BOOL shouldRejectRepeatedLocations;
+
+/**
+*
+* Specifies the minimum update distance in meters. Client will not be notified of movements of less
+* than the stated value, unless the accuracy has improved. Pass in kCLDistanceFilterNone to be
+* notified of all movements. By default, kCLDistanceFilterNone is used.
+*/
+@property (nonatomic, assign) CLLocationDistance distanceFilter;
+
+/**
+* Specifies the minimum amount of change in degrees needed for a heading service update. Client will not
+* be notified of updates less than the stated filter value. Pass in kCLHeadingFilterNone to be
+* notified of all updates. By default, 1 degree is used.
+*/
+@property (nonatomic, assign) CLLocationDegrees headingFilter;
 
 
 /** Indicates if location updates must be strict. 
